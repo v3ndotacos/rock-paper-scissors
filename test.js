@@ -27,38 +27,49 @@ function getHumanChoice(input) {
 }
 
 function playRound(humanChoice, computerChoice) {
-  console.log("test h y c es " + humanChoice + " y " + computerChoice);
-  if (humanChoice === "rock" && computerChoice === "paper") {
-    console.log("You lose! Paper beats Rock");
-    computerScore++;
-  } else if (humanChoice === "scissors" && computerChoice === "rock") {
-    console.log("You lose! Rock beats Scissors");
-    computerScore++;
-  } else if (humanChoice === "paper" && computerChoice === "scissors") {
-    console.log("You lose! Scissors beats Paper");
-    computerScore++;
-  } else if (humanChoice === computerChoice) console.log("Draw");
-  else {
-    console.log("You won!");
-    humanScore++;
+  const stats = document.createElement("p");
+  const result = document.createElement("p");
+  const text = document.createElement("p");
+
+  if (humanScore !== 5 && computerScore !== 5) {
+    text.textContent = "H: " + humanChoice + " | M: " + computerChoice;
+    if (humanChoice === "rock" && computerChoice === "paper") {
+      text.textContent = "You lose! Paper beats Rock";
+      computerScore++;
+    } else if (humanChoice === "scissors" && computerChoice === "rock") {
+      text.textContent = "You lose! Rock beats Scissors";
+      computerScore++;
+    } else if (humanChoice === "paper" && computerChoice === "scissors") {
+      text.textContent = "You lose! Scissors beats Paper";
+      computerScore++;
+    } else if (humanChoice === computerChoice) text.textContent = "Draw.";
+    else {
+      text.textContent = "You won!";
+      humanScore++;
+    }
   }
+  if (humanScore === 5 || computerScore === 5) {
+    stats.textContent = "Match ended, 5 points: ";
+    stats.textContent += `humanScore >> ${humanScore} and computerScore >> ${computerScore}.`;
+    humanScore === 5
+      ? (result.textContent = "Human won.")
+      : (result.textContent = "Computer won.");
+    humanScore = 0;
+    computerScore = 0;
+  }
+  container.appendChild(stats);
+  container.appendChild(result);
+  container.appendChild(text);
 }
 
 function playGame() {
-  // for (let i = 0; i < 5; i++) {
-  //   playRound(
-  //     getHumanChoice(prompt("insertar")),
-  //     getComputerChoice(Math.floor(Math.random() * 3))
-  //   );
-  //   console.log("H: " + humanScore + "C: " + computerScore);
-  // }
   const container = document.querySelector("#container");
 
   const btnSc = document.createElement("button");
   const btnRk = document.createElement("button");
   const btnPp = document.createElement("button");
   const test = document.createElement("p");
-  test.textContent = "ejemplo";
+  test.textContent = "Rock-Paper-Scissors game:";
   container.appendChild(test);
 
   btnSc.textContent = "scissors";
