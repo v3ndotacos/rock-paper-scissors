@@ -45,13 +45,39 @@ function playRound(humanChoice, computerChoice) {
 }
 
 function playGame() {
-  for (let i = 0; i < 5; i++) {
-    playRound(
-      getHumanChoice(prompt("insertar")),
-      getComputerChoice(Math.floor(Math.random() * 3))
-    );
-    console.log("H: " + humanScore + "C: " + computerScore);
-  }
+  // for (let i = 0; i < 5; i++) {
+  //   playRound(
+  //     getHumanChoice(prompt("insertar")),
+  //     getComputerChoice(Math.floor(Math.random() * 3))
+  //   );
+  //   console.log("H: " + humanScore + "C: " + computerScore);
+  // }
+  const container = document.querySelector("#container");
+
+  const btnSc = document.createElement("button");
+  const btnRk = document.createElement("button");
+  const btnPp = document.createElement("button");
+  const test = document.createElement("p");
+  test.textContent = "ejemplo";
+  container.appendChild(test);
+
+  btnSc.textContent = "scissors";
+  btnRk.textContent = "rock";
+  btnPp.textContent = "paper";
+
+  container.appendChild(btnSc);
+  container.appendChild(btnRk);
+  container.appendChild(btnPp);
+
+  btnSc.addEventListener("click", () => {
+    playRound("scissors", getComputerChoice(Math.floor(Math.random() * 3)));
+  });
+  btnRk.addEventListener("click", () => {
+    playRound("rock", getComputerChoice(Math.floor(Math.random() * 3)));
+  });
+  btnPp.addEventListener("click", () => {
+    playRound("paper", getComputerChoice(Math.floor(Math.random() * 3)));
+  });
 }
 
 playGame();
